@@ -1,0 +1,15 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+torch==2.7.0+cpu
+
+streamlit==1.56.0
+google-genai
+groq==1.2.0
+python-dotenv
+
+chromadb==1.5.8
+sentence-transformers==5.4.1
+
+Pillow
+imapclient
+GitPython

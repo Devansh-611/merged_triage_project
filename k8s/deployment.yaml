@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: merge-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: merge-app
+  template:
+    metadata:
+      labels:
+        app: merge-app
+    spec:
+      containers:
+      - name: merge-app
+        image: dev611doc/merge-project:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8501
+        env:
+        - name: GROQ_API_KEY
+          value: "YOUR_GROQ_KEY"
+
+        - name: GEMINI_API_KEY
+          value: "YOUR_GEMINI_KEY"
+
+        - name: EMAIL
+          value: "YOUR_EMAIL"
+
+        - name: APP_PASSWORD
+          value: "YOUR_APP_PASSWORD"
