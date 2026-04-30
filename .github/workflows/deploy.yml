@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
     - name: Checkout code
       uses: actions/checkout@v4
 
@@ -27,11 +28,18 @@ jobs:
       run: |
         docker push dev611doc/merge-project:latest
 
-    - name: SSH into EC2 and restart Kubernetes deployment
+    - name: SSH into EC2 and deploy
       uses: appleboy/ssh-action@v1.0.3
+
       with:
         host: ${{ secrets.EC2_HOST }}
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.EC2_SSH_KEY }}
+
         script: |
+          cd ~/k8s
+
+          sudo k3s kubectl apply -f deployment.yaml
+          sudo k3s kubectl apply -f service.yaml
+
           sudo k3s kubectl rollout restart deployment merge-app
